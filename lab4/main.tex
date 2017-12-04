@@ -1,0 +1,130 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Práctica 4: Planificación - TIA}
+\author{Carlos S. Galindo Jiménez \\ José Antonio Pérez}
+
+\begin{document}
+\maketitle
+
+% Los comentarios empiezan por % y duran toda la linea
+% Para escapar caracteres se usa \
+% para ecuaciones $ecuacion$
+% para nueva linea 2 new line O doble backslash
+% comandos importantes como \section o \subsection o \subsubsection
+\section{Introducción}
+Esta práctica se centra en el uso de distintos planificadores, así como de la representación y formalización de un dominio junto a un problema. Para la definición del problema de planificación hemos usado el lenguaje PDDL. Además, la práctica se divide en dos partes, la primera es dado unos dominios y varios problema de ese dominio usar distintos planificadores y compararlos; la segunda parte es desarrollar un dominio y un problema propios. 
+\section{Análisis y comparación de analizadores}
+En las tablas se muestran los resultados obtenidos tras la ejecución de los problemas del 1 al 4 de los dominios \texttt{pipes}, \texttt{rover} y \texttt{storage}, utilizando distintos planificadores (MIPS y LPG).
+
+
+\begin{table}[h]
+\label{fpipes}
+\begin{center}
+\begin{tabular}{r|c| l|l|l|l|}
+& Dominio PIPES & 1 & 2 & 3 & 4 \\ \hline \hline
+\multirow{3}{*}{MIPS} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{5} & \multicolumn{1}{l|}{14} & \multicolumn{1}{l|}{9} & \multicolumn{1}{l|}{13} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Tiempo cómputo (s)} & \multicolumn{1}{l|}{0.009} & \multicolumn{1}{l|}{0.017} & \multicolumn{1}{l|}{0.096} & \multicolumn{1}{l|}{0.220} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{6.02} & \multicolumn{1}{l|}{24.11} & \multicolumn{1}{l|}{14.06} & \multicolumn{1}{l|}{22.10} \\\hline \hline
+\multirow{3}{*}{LPG} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{6} & \multicolumn{1}{l|}{144} & \multicolumn{1}{l|}{9} & \multicolumn{1}{l|}{18} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Tiempo cómputo} & \multicolumn{1}{l|}{0.025} & \multicolumn{1}{l|}{0.737} & \multicolumn{1}{l|}{0.059} & \multicolumn{1}{l|}{0.038} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{12} & \multicolumn{1}{l|}{278} & \multicolumn{1}{l|}{14} & \multicolumn{1}{l|}{32} \\\hline
+\end{tabular}
+\caption{Valores experimentales para el dominio PIPES}
+\end{center}
+\end{table}
+\begin{table}[h] \label{frover}
+\begin{center}
+\begin{tabular}{r|c| l|l|l|l|}
+& Dominio ROVER & 1 & 2 & 3 & 4 \\ \hline \hline
+\multirow{3}{*}{MIPS} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{10} & \multicolumn{1}{l|}{8} & \multicolumn{1}{l|}{13} & \multicolumn{1}{l|}{8} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Tiempo cómputo (s)} & \multicolumn{1}{l|}{0.009} & \multicolumn{1}{l|}{0.009} & \multicolumn{1}{l|}{0.043} & \multicolumn{1}{l|}{0.010} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{57.05} & \multicolumn{1}{l|}{47.04} & \multicolumn{1}{l|}{67.05} & \multicolumn{1}{l|}{38.03} \\\hline \hline
+\multirow{3}{*}{LPG} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{10} & \multicolumn{1}{l|}{8} & \multicolumn{1}{l|}{15} & \multicolumn{1}{l|}{11} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Tiempo cómputo} & \multicolumn{1}{l|}{0.018} & \multicolumn{1}{l|}{0.026} & \multicolumn{1}{l|}{0.161} & \multicolumn{1}{l|}{0.026} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{75} & \multicolumn{1}{l|}{66} & \multicolumn{1}{l|}{77} & \multicolumn{1}{l|}{62} \\\hline
+\end{tabular}
+\caption{Valores experimentales para el dominio ROVER}
+\end{center} \end{table}
+\begin{table}[H] \label{fstorage}
+\begin{center}
+\begin{tabular}{r|c| l|l|l|l|}
+& Dominio STORAGE & 1 & 2 & 3 & 4 \\ \hline \hline
+\multirow{3}{*}{MIPS} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{8} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Tiempo cómputo (s)} & \multicolumn{1}{l|}{0.002} & \multicolumn{1}{l|}{0.003} & \multicolumn{1}{l|}{0.003} & \multicolumn{1}{l|}{0.002} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{10} \\\hline \hline
+\multirow{3}{*}{LPG} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{14} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Tiempo cómputo} & \multicolumn{1}{l|}{0.020} & \multicolumn{1}{l|}{0.022} & \multicolumn{1}{l|}{0.024} & \multicolumn{1}{l|}{0.021} \\\cline{2-6}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{18} \\\hline
+\end{tabular}
+\caption{Valores experimentales para el dominio STORAGE}
+\end{center}
+\end{table}
+Finalmente, observando las tablas, podemos concluir que la ejecución de los problemas en MIPS obtenemos, generalmente mejores resultados en un tiempo de ejecución menor, con una excepción en casos aislados como la ejecución del problema 4 del dominio \texttt{pipes}, en el que MIPS ha tardado casi un orden de magnitud más que LPG.
+\section{Dominio y problema en PDDL}
+Para la realización de esta segunda y última parte, hemos escogido la siguiente propuesta: “Ejemplo 1. Escenario de logística”. En resumen, el problema se reduce en una serie de camiones con sus respectivos conductores que deben llevar los paquetes de una ciudad a otra. A continuación, vamos a explicar la implementación del dominio y del problema, así como comentar el resultado de la ejecución de estos archivos con distintos planificadores.
+Antes de pasar a la explicación, nos gustaría decir que todo el código que vamos a presentar se encuentra adjunto en la tarea del PoliformaT en los archivos \texttt{dominio.pddl} y \texttt{problema.pddl}.
+\subsection{Definición del dominio}
+Lo primero es poner un nombre al dominio, al cual hemos llamado \texttt{ejemplo1}. A continuación, hemos añadido los requerimientos que nos permiten añadir funciones durativas, predicados con tipo y funciones numéricas. Además, hemos definido como subtipos de \texttt{object}: \texttt{driver}, \texttt{truck}, \texttt{city} y \texttt{package}, que hacen referencia al conductor, camión, ciudad y paquete, respectivamente.
+
+Tras esto, hemos definido tres predicados y varias funciones:
+\begin{itemize}
+\item \texttt{at}: que devuelve un booleano dependiendo si un objeto, ya sea un camión, un conductor o un paquete, se encuentra en una determinada ciudad.
+\item \texttt{in}: que devuelve otro booleano dependiendo si o bien un conductor o un paquete se encuentra en un determinado camión.
+\item \texttt{has-route}: que devuelve un booleano dependiendo si existe o no una ruta entre dos ciudades distintas.
+\item \texttt{cost}: devuelve el coste económico de conducir un camión entre dos ciudades.
+\item \texttt{time}: devuelve la duración del viaje de un camión entre dos ciudades.
+\end{itemize}
+Además, se han definido funciones con el coste temporal y económico de otras acciones como la carga, descarga, subirse y bajarse del camión y el viaje en autobús, todas como funciones separadas, por si cambiara la especificación.
+
+Finalmente, hemos definido las siguientes acciones:
+\begin{itemize}
+\item \texttt{drive}: que toma como parámetros un camión, un conductor, una ciudad de destino y otra de origen. Comprueba que, durante todo momento, hay una ruta entre ambas ciudades y que el camión tiene conductor, y al principio, que el camión se encuentra en la ciudad de origen. Al comenzar, quitará al camión de la ciudad de origen, y al finalizar, el camión se encontrará en el ciudad de destino y se actualizará el coste total.
+\item \texttt{load}: recibe un paquete, un camión y una ciudad. Se comprueba que al inicio el paquete y el camión están en la ciudad. Al comenzar la acción, el paquete deja de estar en la ciudad, y al finalizarla, el paquete se encuentra en el camión y se actualiza el coste total.
+\item \texttt{unload}: recibe un paquete, un camión y una ciudad. Se comprueba que al principio está el paquete en el camión, y el camión en la ciudad. Tras la ejecución de la acción, al principio, el paquete deja de estar en el camión, y al final, el paquete se encuentra en la ciudad y se actualiza el coste total.
+\item \texttt{get-on}: se coge un conductor, un camión y una ciudad. Se comprueba que al principio está el conductor y el camión en la ciudad. Tras la ejecución de la acción, al principio, el conductor deja de estar en la ciudad, y al final, el conductor se encuentra en el camión y se actualiza el coste total.
+\item \texttt{get-off}: se coge un conductor, un camión y una ciudad. Se comprueba que al principio está el conductor en el camión, y el camión en la ciudad. Tras la ejecución de la acción, al principio, el paquete deja de estar en el camión, y al final, el paquete se encuentra en la ciudad y se actualiza el coste total.
+\item \texttt{take-bus}: que coge un conductor, una ciudad de destino y otra de origen. Comprueba que, durante todo momento, hay una ruta entre ambas ciudades, y al principio, que el conductor se encuentra en la ciudad de origen. Al iniciar, quitará al conductor de la ciudad de origen, y al finalizar, el conductor se encontrará en el ciudad de destino y se actualizará el conste total.
+\end{itemize}
+\subsection{Definición del problema}
+Como en el dominio, se le pone un nombre lo primero, en este caso, lo hemos llamado \texttt{ejemplo1caso1}. A continuación se le añade un dominio, obviamente es el dominio "ejemplo1" en nuestro caso, y se instancian los objetos que se nos presentan en el problema, que son: cinco ciudades (A, B, C, D y E), dos paquetes (p1 y p2), dos camiones (c1 y c2) y dos conductores (d1 y d2).
+
+Se dibuja el estado inicial de todos esos objetos mediante los predicados que hemos definido en el dominio, y dándole valores a las funciones numéricas que también se han descrito arriba. Finalmente, se describe cual es el objetivo final de los objetos, y se añade la fórmula de la métrica de evaluación.
+
+Para la inicialización ponemos que p1, c1 y c2 se encuentran en la ciudad A, p2 y d2, en la D y d1 se encuentra en C. Además se añade el coste y el tiempo que se tarda de una ciudad a otra (de acuerdo al grafo planteado en el boletín de la práctica) y si existe ruta entre las ciudades. Finalmente, se añade el coste y el tiempo de las acciones y se inicializa a 0 el valor del coste total.
+
+En cuanto a los objetivos a cumplir, p1 tiene que acabar en la ciudad E, p2 en C, c2 en A y d1 en B.
+\subsection{Conclusiones de las ejecuciones}
+A continuación, presentamos una tabla donde se muestran valores, sacados de la ejecución de nuestro dominio junto con nuestro problema en los dos planificadores que se nos proporciona:\\
+\begin{table}[H]\label{concl}
+\begin{center}
+\begin{tabular}{r|c| l|l|l|l|}
+\multirow{3}{*}{MIPS} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{13}\\\cline{2-3}
+                     & \multicolumn{1}{l|}{Tiempo cómputo (s)} & \multicolumn{1}{l|}{0.02}\\\cline{2-3}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{42}\\\hline \hline
+\multirow{3}{*}{LPG} & \multicolumn{1}{l|}{Número acciones} & \multicolumn{1}{l|}{19}\\\cline{2-3}
+                     & \multicolumn{1}{l|}{Tiempo cómputo} & \multicolumn{1}{l|}{0.124}\\\cline{2-3}
+                     & \multicolumn{1}{l|}{Duración plan} & \multicolumn{1}{l|}{50.13}\\\hline
+\end{tabular}
+\end{center}
+\end{table}
+Ante estos valores, podemos ver que obtenemos mejor resultado con el planificador \texttt{mips}, pues como nuestra fórmula de la métrica de evaluación era de minimización, ha sido con ese planificador con el que hemos obtenido una valor menor de calidad del plan y por lo tanto una mejor métrica para nuestro problema. Además, se han ejecutado menos acciones y en menor tiempo.
+\section{Conclusiones}
+Tras esta práctica, hemos podido aplicar todo lo aprendido en el quinto tema de teoría de la asignatura sobre planificación. Además, hemos podido diseñar un dominio de planificación y el problema que ayuda a resolver. Finalmente, hemos podido comprobar las diferencias que existen en usar, para un mismo dominio y problema, distintos planificadores.
+\end{document}
